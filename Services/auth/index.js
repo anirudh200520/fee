@@ -1,5 +1,5 @@
 // Hardcoded API base URL - no environment variables needed
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
 
 export const register_me = async (formData) => {
     try {
@@ -10,7 +10,7 @@ export const register_me = async (formData) => {
             },
             body: JSON.stringify(formData),
         })
-        const data = res.json();
+        const data = await res.json();
         return data;
     } catch (error) {
         console.log('error in register (service) => ', error);
@@ -26,7 +26,7 @@ export const login_me = async (formData) => {
             },
             body: JSON.stringify(formData),
         })
-        const data = res.json();
+        const data = await res.json();
         return data;
     } catch (error) {
         console.log('error in login (service) => ', error);
@@ -44,7 +44,7 @@ export const forget_password = async (formData) => {
             },
             body: JSON.stringify(formData),
         })
-        const data = res.json();
+        const data = await res.json();
         return data;
     } catch (error) {
         console.log('error in forget Password (service) => ', error);

@@ -14,7 +14,7 @@ export default function PostedJobsDetails() {
     const [loading, setLoading] = useState(true);
     const { id } = router.query;
     const user = useSelector(state => state?.User?.userData)
-    const userId = user?._id
+    const userId = user?.id
 
     const [application, setApplication] = useState([]);
 

@@ -73,9 +73,11 @@ export default function PostAJob() {
             return;
         }
 
-        if (formData.user == null) {
-            return toast.error("Please Login First");
+        if (!formData.user || formData.user === "") {
+            return toast.error("Please Login First - User session not found");
         }
+
+        console.log('Submitting job with user ID:', formData.user, typeof formData.user);
 
         const res = await post_job(formData);
         if (res.success) {

@@ -21,7 +21,7 @@ export default function ApplicationsDetail() {
     const { id } = router.query;
 
     const user = useSelector(state => state?.User?.userData)
-    const userId = user?._id
+    const userId = user?.id
 
     useEffect(() => {
         if (!userId || !Cookies.get('token')) {

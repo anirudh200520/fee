@@ -22,7 +22,7 @@ export default function Dashboard() {
   const dispatch = useDispatch();
 
   const activeUser = useSelector(state => state?.User?.userData)
-  const id = activeUser?._id
+  const id = activeUser?.id
 
   useEffect(() => {
     if (!id || !Cookies.get('token')) {

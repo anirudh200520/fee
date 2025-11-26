@@ -61,7 +61,7 @@ export default function JobDetails() {
 
         if (!user) return toast.error('Please Login First');
 
-        const data = {user : user?._id , job : JobDetails?._id}
+        const data = {user : user?.id , job : JobDetails?.id}
         const res = await book_mark_job(data);
         if(res.success) {
            return toast.success(res.message)
@@ -84,148 +84,170 @@ export default function JobDetails() {
                     <>
                         <ToastContainer />
                         <NavBar />
-                        <div className='w-full  py-20 flex items-center md:px-8 px-2  justify-center flex-col  '>
-                            <div className='w-full h-40 bg-gray-50 text-indigo-600 font-bold flex items-center justify-center flex-col'>
-                                <h1 className='text-3xl'>Job Details</h1>
-                            </div>
-                            <div className='flex items-center  justify-center w-full py-10'>
-                                <div className='flex w-full px-8 md:px-20 items-start md:flex-row flex-col md:justify-between justify-center'>
-                                    <div className='flex mb-1 items-center justify-center'>
-                                        <Image src={"https://xsgames.co/randomusers/avatar.php?g=male"} alt="no-image" className='rounded-full mb-2' width={100} height={100} />
-                                        <div className='px-4 mx-2 flex flex-col items-start justify-center'>
-                                            <p className='font-semibold text-base mb-1' >{JobDetails?.title} </p>
-                                            <p className=' text-sm text-gray-800 mb-1'>{JobDetails?.company}</p>
+                        <div className='w-full py-20 flex items-center justify-center bg-gray-50'>
+                            <div className='max-w-7xl w-full px-4 md:px-8'>
+                                {/* Header Section */}
+                                <div className='w-full bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg shadow-lg p-8 mb-8'>
+                                    <div className='flex items-center justify-between flex-wrap'>
+                                        <div className='flex items-center mb-4 md:mb-0'>
+                                            <Image src={"https://xsgames.co/randomusers/avatar.php?g=male"} alt="company-logo" className='rounded-lg border-4 border-white shadow-lg' width={100} height={100} />
+                                            <div className='ml-6'>
+                                                <h1 className='text-3xl font-bold text-white mb-2'>{JobDetails?.title}</h1>
+                                                <p className='text-xl text-indigo-100'>{JobDetails?.company}</p>
+                                            </div>
                                         </div>
-
-                                    </div>
-                                    <div className='md:px-4 mb-1 px-2 md:mx-2 flex flex-col items-start justify-center'>
-                                        <div className='flex items-center justify-center mb-1'>
-                                            <FaUserAstronaut className='text-xs font-semibold text-indigo-600' />
-                                            <p className='font-semibold text-base mx-1'>Job Poster </p>
-                                            <p className=' text-sm text-gray-800 mx-1'>{JobDetails?.user?.name}</p>
-                                        </div>
-                                        <div className='flex items-center justify-center mb-1'>
-                                            <MdEmail className='text-xs font-semibold text-indigo-600' />
-                                            <p className='font-semibold text-base mx-1'>Email </p>
-                                            <p className=' text-sm text-gray-800 mx-1'>{JobDetails?.user?.email}</p>
-                                        </div>
-                                    </div>
-                                    <div className='md:px-4 mb-1 px-2 md:mx-2 flex flex-col items-start justify-center'>
-                                        <div className='flex items-center justify-center mb-1'>
-                                            <GoLocation className='text-xs font-semibold text-indigo-600' />
-                                            <p className='font-semibold text-base mx-1'>Location </p>
-                                            <p className=' text-sm text-gray-800 mx-1'>Rawalipindi</p>
-                                        </div>
-                                        <div className='flex items-center justify-center mb-1'>
-                                            <MdCategory className='text-xs font-semibold text-indigo-600' />
-                                            <p className='font-semibold text-base mx-1'>Category </p>
-                                            <p className=' text-sm text-gray-800 mx-1'>{JobDetails?.job_category}</p>
-                                        </div>
-                                    </div>
-                                    <div className='md:px-4 mb-1 px-2 md:mx-2 flex flex-col items-start justify-center'>
-                                        <div className='flex items-center justify-center mb-1'>
-                                            <BsBriefcaseFill className='text-xs font-semibold text-indigo-600' />
-                                            <p className='font-semibold text-base mx-1'>Job Type </p>
-                                            <p className='text-sm text-gray-800 mx-1'>{JobDetails?.job_type}</p>
-                                        </div>
-                                        <div className='flex items-center justify-center mb-1'>
-                                            <AiOutlineDollarCircle className='text-xs font-semibold text-indigo-600' />
-                                            <p className='font-semibold text-base mx-1'>Salary </p>
-                                            <p className=' text-sm text-gray-800 mx-1'>$ {JobDetails?.salary} </p>
-                                        </div>
-                                    </div>
-                                    <div className='flex items-center justify-center'>
                                         {
                                             JobDetails?.user?.email === user?.email ? (
-                                                <p className='text-xs text-red-500'>unable Apply to your Own jobs</p>
+                                                <p className='text-sm bg-red-100 text-red-600 px-4 py-2 rounded-lg'>Your Posted Job</p>
                                             ) : (
-                                                <div className='flex items-center justify-center  '>
-                                                    <BsFillBookmarkCheckFill onClick={handleBookMark} className='text-indigo-600 text-4xl cursor-pointer  mx-2'/>
-                                                    <button onClick={handleApply} className='md:px-6 md:py-3 px-3 py-2 mt-2 md:mt-0 bg-indigo-500 rounded text-base tracking-widest uppercase transition-all duration-700 hover:bg-indigo-900 text-white  '>Apply Position</button>
+                                                <div className='flex items-center gap-3'>
+                                                    <button onClick={handleBookMark} className='px-4 py-3 bg-white text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all duration-300 flex items-center gap-2 shadow-lg'>
+                                                        <BsFillBookmarkCheckFill className='text-xl'/>
+                                                        <span className='font-semibold'>Save</span>
+                                                    </button>
+                                                    <button onClick={handleApply} className='px-6 py-3 bg-yellow-400 text-gray-900 rounded-lg hover:bg-yellow-500 transition-all duration-300 font-bold shadow-lg'>
+                                                        Apply Now
+                                                    </button>
                                                 </div>
                                             )
                                         }
                                     </div>
                                 </div>
-                            </div>
-                            <div className='w-full md:px-4 py-2 flex items-center md:items-start md:flex-row flex-col justify-start md:justify-center'>
-                                <div className='md:w-8/12 w-full md:px-4 py-8 flex flex-col items-center content-start justify-center '>
-                                    <h1 className='text-center lg:text-2xl font-semibold text-xl mb-4 uppercase border-b-2 border-indigo-600 py-2'>Job Description</h1>
-                                    <p className='px-4'>{JobDetails?.description}</p>
-                                </div>
-                                <div className='md:w-4/12 w-full py-8 px-4 md:px-10'>
-                                    <h1 className=' text-2xl font-semibold mb-2'>Job Summary</h1>
-                                    <div className='flex items-center justify-start mb-3'>
-                                        <RiUserSearchFill className='text-base font-semibold text-indigo-600' />
-                                        <p className='font-semibold text-base mx-1'>Total Vacancies </p>
-                                        <p className=' text-sm text-gray-800 mx-1'>{JobDetails?.job_vacancy}</p>
-                                    </div>
-                                    <div className='flex items-center justify-start mb-3'>
-                                        <BsFillCalendar2DateFill className='text-base font-semibold text-indigo-600' />
-                                        <p className='font-semibold text-base mx-1'>Dead Line</p>
-                                        <p className=' text-sm text-gray-800 mx-1'>{new Date(`${JobDetails?.job_deadline}`).toLocaleDateString('en-GB')}</p>
-                                    </div>
-                                    <div className='flex items-center justify-start mb-3'>
-                                        <HiOutlineStar className='text-base font-semibold text-indigo-600' />
-                                        <p className='font-semibold text-base mx-1'>Experience Required</p>
-                                        <p className=' text-sm text-gray-800 mx-1'>{JobDetails?.job_experience}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='w-full px-2 md:px-8 mb-2 flex flex-col'>
-                                <h1 className='text-xl font-semibold lg:text-2xl '>Related Jobs</h1>
-                                <div className='md:px-8 px-2 md:mx-4 flex flex-wrap items-center justify-center'>
-                                    {/* card */}
 
+                                {/* Main Content Grid */}
+                                <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8'>
+                                    {/* Left Column - Job Details */}
+                                    <div className='lg:col-span-2 space-y-6'>
+                                        {/* Job Description */}
+                                        <div className='bg-white rounded-lg shadow-md p-6'>
+                                            <h2 className='text-2xl font-bold text-gray-800 mb-4 border-b-2 border-indigo-600 pb-2'>Job Description</h2>
+                                            <p className='text-gray-700 leading-relaxed whitespace-pre-line'>{JobDetails?.description}</p>
+                                        </div>
+
+                                        {/* Job Information Grid */}
+                                        <div className='bg-white rounded-lg shadow-md p-6'>
+                                            <h2 className='text-2xl font-bold text-gray-800 mb-4'>Job Information</h2>
+                                            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                                                <div className='flex items-center p-3 bg-indigo-50 rounded-lg'>
+                                                    <MdCategory className='text-2xl text-indigo-600 mr-3' />
+                                                    <div>
+                                                        <p className='text-xs text-gray-500 uppercase'>Category</p>
+                                                        <p className='font-semibold text-gray-800'>{JobDetails?.job_category}</p>
+                                                    </div>
+                                                </div>
+                                                <div className='flex items-center p-3 bg-indigo-50 rounded-lg'>
+                                                    <BsBriefcaseFill className='text-2xl text-indigo-600 mr-3' />
+                                                    <div>
+                                                        <p className='text-xs text-gray-500 uppercase'>Job Type</p>
+                                                        <p className='font-semibold text-gray-800'>{JobDetails?.job_type}</p>
+                                                    </div>
+                                                </div>
+                                                <div className='flex items-center p-3 bg-green-50 rounded-lg'>
+                                                    <AiOutlineDollarCircle className='text-2xl text-green-600 mr-3' />
+                                                    <div>
+                                                        <p className='text-xs text-gray-500 uppercase'>Salary</p>
+                                                        <p className='font-semibold text-gray-800'>${JobDetails?.salary.toLocaleString()} / month</p>
+                                                    </div>
+                                                </div>
+                                                <div className='flex items-center p-3 bg-indigo-50 rounded-lg'>
+                                                    <HiOutlineStar className='text-2xl text-indigo-600 mr-3' />
+                                                    <div>
+                                                        <p className='text-xs text-gray-500 uppercase'>Experience</p>
+                                                        <p className='font-semibold text-gray-800'>{JobDetails?.job_experience}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Right Column - Sidebar */}
+                                    <div className='space-y-6'>
+                                        {/* Job Summary Card */}
+                                        <div className='bg-white rounded-lg shadow-md p-6 sticky top-24'>
+                                            <h2 className='text-xl font-bold text-gray-800 mb-4'>Job Summary</h2>
+                                            <div className='space-y-4'>
+                                                <div className='border-l-4 border-indigo-600 pl-4'>
+                                                    <div className='flex items-center mb-2'>
+                                                        <RiUserSearchFill className='text-lg text-indigo-600 mr-2' />
+                                                        <p className='text-sm text-gray-500'>Vacancies</p>
+                                                    </div>
+                                                    <p className='font-bold text-xl text-gray-800'>{JobDetails?.job_vacancy} Positions</p>
+                                                </div>
+                                                <div className='border-l-4 border-red-600 pl-4'>
+                                                    <div className='flex items-center mb-2'>
+                                                        <BsFillCalendar2DateFill className='text-lg text-red-600 mr-2' />
+                                                        <p className='text-sm text-gray-500'>Deadline</p>
+                                                    </div>
+                                                    <p className='font-bold text-xl text-gray-800'>{new Date(`${JobDetails?.job_deadline}`).toLocaleDateString('en-GB')}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Posted By Card */}
+                                        <div className='bg-white rounded-lg shadow-md p-6'>
+                                            <h2 className='text-xl font-bold text-gray-800 mb-4'>Posted By</h2>
+                                            <div className='space-y-3'>
+                                                <div className='flex items-center'>
+                                                    <FaUserAstronaut className='text-indigo-600 mr-3' />
+                                                    <div>
+                                                        <p className='text-xs text-gray-500'>Name</p>
+                                                        <p className='font-semibold text-gray-800'>{JobDetails?.user?.name}</p>
+                                                    </div>
+                                                </div>
+                                                <div className='flex items-center'>
+                                                    <MdEmail className='text-indigo-600 mr-3' />
+                                                    <div>
+                                                        <p className='text-xs text-gray-500'>Email</p>
+                                                        <p className='font-semibold text-gray-800 text-sm'>{JobDetails?.user?.email}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Related Jobs Section */}
+                                <div className='bg-white rounded-lg shadow-md p-6'>
+                                    <h2 className='text-2xl font-bold text-gray-800 mb-6'>Similar Jobs</h2>
                                     {
                                         machingData?.length === 0 ? (
-                                            <>
-                                                <div className='md:w-96 w-full py-3 mx-4 my-2 flex items-center md:items-start px-6 justify-start md:justify-center flex-col rounded bg-gray-50'>
-                                                    <p  className='text-xs font-semibold text-red-600 uppercase'>No Other similar Jobs Available ...</p>
-                                                </div>
-
-                                            </> 
+                                            <div className='text-center py-12 bg-gray-50 rounded-lg'>
+                                                <p className='text-gray-500'>No similar jobs available at the moment</p>
+                                            </div>
                                         ) : (
-                                        machingData?.map((item) => {
-                                            return (
-                                                <div key={item?._id} className='md:w-96 w-full py-3 mx-4 my-2 flex items-center md:items-start px-6 justify-start md:justify-center flex-col rounded bg-gray-50'>
-                                                    <div className='mb-4 flex px-4 flex-col md:flex-row items-center justify-start py-2 '>
-                                                        <Image width={70} height={70} className="flex rounded-full mb-4 md:mb-0" src={"https://xsgames.co/randomusers/avatar.php?g=male"} alt="no image" />
-                                                        <div className='flex flex-col w-full mx-2 px-2'>
-                                                            <h1 className='text-base md:text-left text-center  md:text-2xl font-semibold'>{item?.title}</h1>
-                                                            <p className='text-xs md:text-left text-center sm:text-sm md:text-base text-gray-800'>{item?.company}</p>
+                                            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                                                {machingData?.map((item) => (
+                                                    <div key={item?.id} className='bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-indigo-400'>
+                                                        <div className='flex items-center mb-4'>
+                                                            <Image width={60} height={60} className="rounded-lg" src={"https://xsgames.co/randomusers/avatar.php?g=male"} alt="company" />
+                                                            <div className='ml-4 flex-1'>
+                                                                <h3 className='font-bold text-lg text-gray-800 line-clamp-1'>{item?.title}</h3>
+                                                                <p className='text-sm text-gray-600'>{item?.company}</p>
+                                                            </div>
                                                         </div>
+                                                        <div className='space-y-2 mb-4'>
+                                                            <div className='flex items-center text-sm'>
+                                                                <BsBriefcaseFill className='text-indigo-600 mr-2' />
+                                                                <span className='text-gray-600'>{item?.job_type}</span>
+                                                            </div>
+                                                            <div className='flex items-center text-sm'>
+                                                                <AiOutlineDollarCircle className='text-green-600 mr-2' />
+                                                                <span className='text-gray-600 font-semibold'>${item?.salary.toLocaleString()}</span>
+                                                            </div>
+                                                            <div className='flex items-center text-sm'>
+                                                                <BsFillCalendar2DateFill className='text-red-600 mr-2' />
+                                                                <span className='text-gray-600'>{new Date(`${item?.job_deadline}`).toLocaleDateString('en-GB')}</span>
+                                                            </div>
+                                                        </div>
+                                                        <button onClick={() => router.push(`/frontend/jobDetails/${item?.id}`)} className='w-full py-2 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-300 font-semibold flex items-center justify-center gap-2'>
+                                                            View Details
+                                                            <AiOutlineArrowRight className='text-lg' />
+                                                        </button>
                                                     </div>
-                                                    <div className='flex flex-col px-1 md:px-4 py-6 items-start justify-center'>
-                                                        <div className='flex px-1 md:px-4 items-center justify-start mb-2'>
-                                                            <BsBriefcaseFill className='text-base font-semibold text-indigo-600' />
-                                                            <p className='font-semibold text-xs md:text-base mx-1'>Job Type </p>
-                                                            <p className='text-sm text-gray-800 mx-1'>{item?.job_type}</p>
-                                                        </div>
-                                                        <div className='flex px-1 md:px-4 items-center justify-center mb-2'>
-                                                            <AiOutlineDollarCircle className='text-base font-semibold text-indigo-600' />
-                                                            <p className='font-semibold text-xs md:text-base mx-1'>Salary </p>
-                                                            <p className=' text-sm text-gray-800 mx-1'>{item?.salary}</p>
-                                                        </div>
-                                                        <div className='flex px-1 md:px-4 items-center justify-center mb-2'>
-                                                            <RiUserSearchFill className='text-base font-semibold text-indigo-600' />
-                                                            <p className='font-semibold text-xs md:text-base mx-1'>Total Vacancies </p>
-                                                            <p className=' text-sm text-gray-800 mx-1'>{item?.job_vacancy}</p>
-                                                        </div>
-                                                        <div className='flex px-1 md:px-4 items-center justify-center mb-2'>
-                                                            <BsFillCalendar2DateFill className='text-base font-semibold text-indigo-600' />
-                                                            <p className='font-semibold text-xs md:text-base mx-1'>Dead Line</p>
-                                                            <p className=' text-xs text-gray-800 mx-1'>{new Date(`${item?.job_deadline}`).toLocaleDateString('en-GB')}</p>
-                                                        </div>
-                                                    </div>
-                                                    <button onClick={() => router.push(`/frontend/jobDetails/${item?._id}`)} className='my-2 py-2 px-4  border border-indigo-600 uppercase  rounded flex items-center justify-center transition-all duration-700 hover:bg-indigo-600 hover:text-white text-indigo-600 font-semibold'>View Detail<AiOutlineArrowRight className='mx-2 text-xl' /></button>
-                                                </div>
-                                            )
-                                        })
+                                                ))}
+                                            </div>
                                         )
                                     }
-
-                                    {/* card */}
                                 </div>
                             </div>
                         </div>

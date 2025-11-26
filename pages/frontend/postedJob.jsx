@@ -15,7 +15,7 @@ export default function PostedJobs() {
     const dispatch = useDispatch();
     const user = useSelector(state => state?.User?.userData)
     const myJobs = useSelector(state => state?.Job?.myJobs);
-    const id = user?._id
+    const id = user?.id
 
 
 

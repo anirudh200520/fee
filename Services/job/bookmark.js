@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 
 // Hardcoded API base URL - no environment variables needed
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
 
 
 // bookmark job api
