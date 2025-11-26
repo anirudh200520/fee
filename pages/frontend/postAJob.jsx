@@ -17,8 +17,8 @@ export default function PostAJob() {
 
     // Update formData when user data is loaded
     React.useEffect(() => {
-        if (user?._id) {
-            setFormData(prev => ({ ...prev, user: user._id }));
+        if (user?.id) {
+            setFormData(prev => ({ ...prev, user: user.id }));
         }
     }, [user]);
 

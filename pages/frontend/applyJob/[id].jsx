@@ -17,10 +17,10 @@ export default function ApplyJob() {
 
     // Update formData when user data is loaded
     React.useEffect(() => {
-        if (activeUser?._id) {
+        if (activeUser?.id) {
             setFormikData(prev => ({ 
                 ...prev, 
-                user: activeUser._id,
+                user: activeUser.id,
                 email: activeUser.email || prev.email 
             }));
         }
