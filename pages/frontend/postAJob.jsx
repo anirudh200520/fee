@@ -12,8 +12,15 @@ export default function PostAJob() {
     const user = useSelector(state => state.User.userData)
     const router = useRouter();
 
-    const [formData, setFormData] = useState({ user: user?._id, title: "", salary: 0, email: "", company: "", description: "", job_category: "", job_type: "", job_experience: "", job_vacancy: 0, job_deadline: "" });
+    const [formData, setFormData] = useState({ user: "", title: "", salary: 0, email: "", company: "", description: "", job_category: "", job_type: "", job_experience: "", job_vacancy: 0, job_deadline: "" });
     const [error, setError] = useState({ user: "", title: "", salary: "", email: "", company: "", description: "", job_category: "", job_type: "", job_experience: "", job_vacancy: "", job_deadline: "" });
+
+    // Update formData when user data is loaded
+    React.useEffect(() => {
+        if (user?._id) {
+            setFormData(prev => ({ ...prev, user: user._id }));
+        }
+    }, [user]);
 
     const handleSubmit = async (e) => {
 

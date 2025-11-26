@@ -11,9 +11,27 @@ export default function ApplyJob() {
     const dispatch = useDispatch();
     const { id } = router.query
     const activeUser = useSelector(state => state.User.userData)
-    const [formikData, setFormikData] = useState({ name: '', email: activeUser?.email , about: '', job: id, user: activeUser?._id })
+    const [formikData, setFormikData] = useState({ name: '', email: '', about: '', job: id, user: '' })
     const [file, setFile] = useState(null)
     const [error, setError] = useState({ name: '', email: "", about: '', job: '', user: '', cv: '' });
+
+    // Update formData when user data is loaded
+    React.useEffect(() => {
+        if (activeUser?._id) {
+            setFormikData(prev => ({ 
+                ...prev, 
+                user: activeUser._id,
+                email: activeUser.email || prev.email 
+            }));
+        }
+    }, [activeUser]);
+
+    // Update job ID when available
+    React.useEffect(() => {
+        if (id) {
+            setFormikData(prev => ({ ...prev, job: id }));
+        }
+    }, [id]);
 
 
     const { name, email, about, job, user } = formikData;
